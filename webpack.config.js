@@ -4,7 +4,7 @@ var BUILD_PATH = path.resolve(__dirname, 'build');
 
 var node_modules = path.resolve(__dirname, 'node_modules');
 var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
-var pathToReactDom = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js')
+var pathToReactDom = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js');
 
 var config = {
     entry: APP_PATH,
