@@ -1,4 +1,5 @@
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var APP_PATH = path.resolve(__dirname, 'app/main.js');
 var BUILD_PATH = path.resolve(__dirname, 'build');
 
@@ -23,8 +24,9 @@ var config = {
             test: /\.jsx?$/,
             loaders: ['babel-loader?presets[]=es2015,presets[]=react']
         }, {
-            test: /\.less$/,
-            loader: 'style-loader!css-loader!less-loader'
+            test: /\.css$/,
+            // loader: 'style-loader!css-loader!less-loader'
+            loader: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader" })
         }, {
             test: /\.(jpe?g|png|gif|svg)$/,
             loader: 'url-loader',
@@ -32,9 +34,15 @@ var config = {
                 limit: 50000,
                 name: 'static/img/[name].[ext]?[hash:7]'
             }
+        }, {
+            test: /\.(eot|woff|woff2|ttf)$/, 
+            loader: "file-loader"
         }],
         noParse: [pathToReact, pathToReactDom]
-    }
+    },
+    plugins: [
+        new ExtractTextPlugin("css/bundle.css")
+    ]
 }
 
 module.exports = config;

@@ -4446,13 +4446,73 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = function warning() {};
+
+if (process.env.NODE_ENV !== 'production') {
+  warning = function warning(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.length < 10 || /^[s\W]*$/.test(format)) {
+      throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
+    }
+
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' + format.replace(/%s/g, function () {
+        return args[argIndex++];
+      });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error(message);
+      } catch (x) {}
+    }
+  };
+}
+
+module.exports = warning;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 var core = module.exports = { version: '2.4.0' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4470,7 +4530,7 @@ var $exports = module.exports = function (name) {
 $exports.store = store;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4602,66 +4662,6 @@ SafeAnchor.defaultProps = defaultProps;
 exports.default = SafeAnchor;
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = function warning() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  warning = function warning(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.length < 10 || /^[s\W]*$/.test(format)) {
-      throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
-    }
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    }
-  };
-}
-
-module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
-
-/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4669,7 +4669,7 @@ module.exports = warning;
 
 
 var global = __webpack_require__(19),
-    core = __webpack_require__(14),
+    core = __webpack_require__(15),
     ctx = __webpack_require__(51),
     hide = __webpack_require__(27),
     PROTOTYPE = 'prototype';
@@ -5047,7 +5047,7 @@ var _bootstrapUtils = __webpack_require__(7);
 
 var _StyleConfig = __webpack_require__(10);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -5371,7 +5371,7 @@ var _uncontrollable = __webpack_require__(48);
 
 var _uncontrollable2 = _interopRequireDefault(_uncontrollable);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -6021,7 +6021,7 @@ function createChainableTypeChecker(validate) {
 
 exports.__esModule = true;
 
-var _createUncontrollable = __webpack_require__(258);
+var _createUncontrollable = __webpack_require__(257);
 
 var _createUncontrollable2 = _interopRequireDefault(_createUncontrollable);
 
@@ -6230,7 +6230,7 @@ exports.f = Object.getOwnPropertySymbols;
 
 var def = __webpack_require__(23).f,
     has = __webpack_require__(22),
-    TAG = __webpack_require__(15)('toStringTag');
+    TAG = __webpack_require__(16)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -6318,7 +6318,7 @@ module.exports = function (it, S) {
 
 
 var global = __webpack_require__(19),
-    core = __webpack_require__(14),
+    core = __webpack_require__(15),
     LIBRARY = __webpack_require__(54),
     wksExt = __webpack_require__(64),
     defineProperty = __webpack_require__(23).f;
@@ -6334,7 +6334,7 @@ module.exports = function (name) {
 "use strict";
 
 
-exports.f = __webpack_require__(15);
+exports.f = __webpack_require__(16);
 
 /***/ }),
 /* 65 */
@@ -7575,7 +7575,7 @@ var LIBRARY = __webpack_require__(54),
     $iterCreate = __webpack_require__(144),
     setToStringTag = __webpack_require__(57),
     getPrototypeOf = __webpack_require__(152),
-    ITERATOR = __webpack_require__(15)('iterator'),
+    ITERATOR = __webpack_require__(16)('iterator'),
     BUGGY = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 ,
     FF_ITERATOR = '@@iterator',
@@ -8145,7 +8145,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -8530,7 +8530,7 @@ var _Button = __webpack_require__(36);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -9272,7 +9272,7 @@ var _all = __webpack_require__(45);
 
 var _all2 = _interopRequireDefault(_all);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -9661,7 +9661,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -10030,7 +10030,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -10309,7 +10309,7 @@ var _elementType = __webpack_require__(8);
 
 var _elementType2 = _interopRequireDefault(_elementType);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -11433,6 +11433,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(245);
 
+__webpack_require__(260);
+
+__webpack_require__(259);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11458,8 +11462,8 @@ var Hello = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     _reactBootstrap.Button,
-                    null,
-                    'Default'
+                    { bsStyle: 'primary' },
+                    'Primary'
                 )
             );
         }
@@ -11549,7 +11553,7 @@ module.exports = { "default": __webpack_require__(133), __esModule: true };
 
 __webpack_require__(87);
 __webpack_require__(157);
-module.exports = __webpack_require__(14).Array.from;
+module.exports = __webpack_require__(15).Array.from;
 
 /***/ }),
 /* 127 */
@@ -11559,7 +11563,7 @@ module.exports = __webpack_require__(14).Array.from;
 
 
 __webpack_require__(159);
-module.exports = __webpack_require__(14).Object.assign;
+module.exports = __webpack_require__(15).Object.assign;
 
 /***/ }),
 /* 128 */
@@ -11569,7 +11573,7 @@ module.exports = __webpack_require__(14).Object.assign;
 
 
 __webpack_require__(160);
-var $Object = __webpack_require__(14).Object;
+var $Object = __webpack_require__(15).Object;
 module.exports = function create(P, D) {
   return $Object.create(P, D);
 };
@@ -11582,7 +11586,7 @@ module.exports = function create(P, D) {
 
 
 __webpack_require__(164);
-module.exports = __webpack_require__(14).Object.entries;
+module.exports = __webpack_require__(15).Object.entries;
 
 /***/ }),
 /* 130 */
@@ -11592,7 +11596,7 @@ module.exports = __webpack_require__(14).Object.entries;
 
 
 __webpack_require__(161);
-module.exports = __webpack_require__(14).Object.setPrototypeOf;
+module.exports = __webpack_require__(15).Object.setPrototypeOf;
 
 /***/ }),
 /* 131 */
@@ -11602,7 +11606,7 @@ module.exports = __webpack_require__(14).Object.setPrototypeOf;
 
 
 __webpack_require__(165);
-module.exports = __webpack_require__(14).Object.values;
+module.exports = __webpack_require__(15).Object.values;
 
 /***/ }),
 /* 132 */
@@ -11615,7 +11619,7 @@ __webpack_require__(163);
 __webpack_require__(162);
 __webpack_require__(166);
 __webpack_require__(167);
-module.exports = __webpack_require__(14).Symbol;
+module.exports = __webpack_require__(15).Symbol;
 
 /***/ }),
 /* 133 */
@@ -11689,7 +11693,7 @@ module.exports = function (IS_INCLUDES) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = __webpack_require__(50),
-    TAG = __webpack_require__(15)('toStringTag')
+    TAG = __webpack_require__(16)('toStringTag')
 // ES3 wrong here
 ,
     ARG = cof(function () {
@@ -11771,7 +11775,7 @@ module.exports = __webpack_require__(19).document && document.documentElement;
 
 // check on default Array iterator
 var Iterators = __webpack_require__(33),
-    ITERATOR = __webpack_require__(15)('iterator'),
+    ITERATOR = __webpack_require__(16)('iterator'),
     ArrayProto = Array.prototype;
 
 module.exports = function (it) {
@@ -11824,7 +11828,7 @@ var create = __webpack_require__(55),
     IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(27)(IteratorPrototype, __webpack_require__(15)('iterator'), function () {
+__webpack_require__(27)(IteratorPrototype, __webpack_require__(16)('iterator'), function () {
   return this;
 });
 
@@ -11840,7 +11844,7 @@ module.exports = function (Constructor, NAME, next) {
 "use strict";
 
 
-var ITERATOR = __webpack_require__(15)('iterator'),
+var ITERATOR = __webpack_require__(16)('iterator'),
     SAFE_CLOSING = false;
 
 try {
@@ -12161,9 +12165,9 @@ module.exports = function (index, length) {
 
 
 var classof = __webpack_require__(137),
-    ITERATOR = __webpack_require__(15)('iterator'),
+    ITERATOR = __webpack_require__(16)('iterator'),
     Iterators = __webpack_require__(33);
-module.exports = __webpack_require__(14).getIteratorMethod = function (it) {
+module.exports = __webpack_require__(15).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
 };
 
@@ -12318,7 +12322,7 @@ var global = __webpack_require__(19),
     shared = __webpack_require__(59),
     setToStringTag = __webpack_require__(57),
     uid = __webpack_require__(38),
-    wks = __webpack_require__(15),
+    wks = __webpack_require__(16),
     wksExt = __webpack_require__(64),
     wksDefine = __webpack_require__(63),
     keyOf = __webpack_require__(147),
@@ -12611,7 +12615,7 @@ __webpack_require__(158);
 var global = __webpack_require__(19),
     hide = __webpack_require__(27),
     Iterators = __webpack_require__(33),
-    TO_STRING_TAG = __webpack_require__(15)('toStringTag');
+    TO_STRING_TAG = __webpack_require__(16)('toStringTag');
 
 for (var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++) {
   var NAME = collections[i],
@@ -13648,7 +13652,7 @@ var _Glyphicon = __webpack_require__(69);
 
 var _Glyphicon2 = _interopRequireDefault(_Glyphicon);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -14151,7 +14155,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -14694,7 +14698,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -15207,7 +15211,7 @@ var _elementType = __webpack_require__(8);
 
 var _elementType2 = _interopRequireDefault(_elementType);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -16923,7 +16927,7 @@ var _all = __webpack_require__(45);
 
 var _all2 = _interopRequireDefault(_all);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -18281,7 +18285,7 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -19059,7 +19063,7 @@ var _elementType = __webpack_require__(8);
 
 var _elementType2 = _interopRequireDefault(_elementType);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -19759,7 +19763,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -19889,7 +19893,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -20660,7 +20664,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SafeAnchor = __webpack_require__(16);
+var _SafeAnchor = __webpack_require__(17);
 
 var _SafeAnchor2 = _interopRequireDefault(_SafeAnchor);
 
@@ -21154,7 +21158,7 @@ var _Row2 = __webpack_require__(236);
 
 var _Row3 = _interopRequireDefault(_Row2);
 
-var _SafeAnchor2 = __webpack_require__(16);
+var _SafeAnchor2 = __webpack_require__(17);
 
 var _SafeAnchor3 = _interopRequireDefault(_SafeAnchor2);
 
@@ -21501,7 +21505,7 @@ var _typeof2 = __webpack_require__(49);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-var _warning = __webpack_require__(17);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -21625,7 +21629,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _warning = __webpack_require__(257);
+var _warning = __webpack_require__(14);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -23083,66 +23087,6 @@ function showSiblings(container, mountNode) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = function warning() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  warning = function warning(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.length < 10 || /^[s\W]*$/.test(format)) {
-      throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
-    }
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    }
-  };
-}
-
-module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
-
-/***/ }),
-/* 258 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
 exports.__esModule = true;
@@ -23167,7 +23111,7 @@ var _invariant = __webpack_require__(66);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _utils = __webpack_require__(259);
+var _utils = __webpack_require__(258);
 
 var utils = _interopRequireWildcard(_utils);
 
@@ -23328,7 +23272,7 @@ function createUncontrollable(mixins, set) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 259 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23451,6 +23395,18 @@ function isReactComponent(component) {
   return !!(component && component.prototype && component.prototype.isReactComponent);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
