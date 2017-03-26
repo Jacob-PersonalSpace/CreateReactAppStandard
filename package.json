@@ -4,8 +4,9 @@
   "description": "It is the standard to create react App",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+    "febuild": "webpack",
+    "fedev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
+    "bestart": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
   },
   "homepage": "https://github.com/Jacob-PersonalSpace/CreateReactAppStandard#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
     "path": "^0.12.7",
+    "pusher": "^1.5.1",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
