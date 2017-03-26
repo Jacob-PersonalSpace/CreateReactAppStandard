@@ -11437,6 +11437,10 @@ __webpack_require__(260);
 
 __webpack_require__(259);
 
+var _bg = __webpack_require__(261);
+
+var _bg2 = _interopRequireDefault(_bg);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11445,42 +11449,119 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Hello = function (_React$Component) {
-    _inherits(Hello, _React$Component);
+var Comment = function (_React$Component) {
+    _inherits(Comment, _React$Component);
 
-    function Hello() {
-        _classCallCheck(this, Hello);
+    function Comment() {
+        _classCallCheck(this, Comment);
 
-        return _possibleConstructorReturn(this, (Hello.__proto__ || Object.getPrototypeOf(Hello)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Comment.__proto__ || Object.getPrototypeOf(Comment)).apply(this, arguments));
     }
 
-    _createClass(Hello, [{
+    _createClass(Comment, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    _reactBootstrap.Button,
-                    { bsStyle: 'primary' },
-                    'Primary'
+                    _reactBootstrap.Form,
+                    { inline: true },
+                    _react2.default.createElement(
+                        _reactBootstrap.FormGroup,
+                        { controlId: 'formInlineName' },
+                        _react2.default.createElement(
+                            _reactBootstrap.ControlLabel,
+                            null,
+                            'Name'
+                        ),
+                        ' ',
+                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Input your name.' })
+                    ),
+                    ' ',
+                    _react2.default.createElement(
+                        _reactBootstrap.FormGroup,
+                        { controlId: 'formInlineEmail' },
+                        _react2.default.createElement(
+                            _reactBootstrap.ControlLabel,
+                            null,
+                            'comment'
+                        ),
+                        ' ',
+                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Write comment here.' })
+                    ),
+                    ' ',
+                    _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        { type: 'submit' },
+                        'submit'
+                    )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    _reactBootstrap.Panel,
+                    { collapsible: true, defaultExpanded: true, header: 'Panel heading' },
+                    'Some default panel content here.',
+                    _react2.default.createElement(
+                        _reactBootstrap.ListGroup,
+                        { fill: true },
+                        _react2.default.createElement(
+                            _reactBootstrap.ListGroupItem,
+                            null,
+                            'Item 1'
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.ListGroupItem,
+                            null,
+                            'Item 2'
+                        ),
+                        _react2.default.createElement(
+                            _reactBootstrap.ListGroupItem,
+                            null,
+                            '\u2026'
+                        )
+                    ),
+                    'Some more panel content here.'
                 ),
                 _react2.default.createElement(
-                    _reactBootstrap.Button,
-                    { bsSize: 'large' },
-                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'star' }),
-                    ' Star'
+                    _reactBootstrap.Media,
+                    null,
+                    _react2.default.createElement(
+                        _reactBootstrap.Media.Left,
+                        { align: 'top' },
+                        _react2.default.createElement('img', { width: 64, height: 64, src: _bg2.default, alt: 'Image' })
+                    ),
+                    _react2.default.createElement(
+                        _reactBootstrap.Media.Body,
+                        null,
+                        _react2.default.createElement(
+                            _reactBootstrap.Media.Heading,
+                            null,
+                            'Top aligned media'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'
+                        )
+                    )
                 )
             );
         }
     }]);
 
-    return Hello;
+    return Comment;
 }(_react2.default.Component);
 
 ;
 
-exports.default = Hello;
+exports.default = Comment;
 
 /***/ }),
 /* 120 */
@@ -11497,13 +11578,13 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _component = __webpack_require__(119);
+var _comment = __webpack_require__(119);
 
-var _component2 = _interopRequireDefault(_component);
+var _comment2 = _interopRequireDefault(_comment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_component2.default, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_comment2.default, null), document.getElementById('app'));
 
 /***/ }),
 /* 121 */
@@ -23413,6 +23494,12 @@ function isReactComponent(component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/img/bg.png?f139926";
 
 /***/ })
 /******/ ]);

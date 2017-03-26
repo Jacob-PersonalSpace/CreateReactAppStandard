@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Hello from './component.js';
+import Comment from './component/comment.js';
 
 ReactDom.render(
-    <Hello />,
+    <Comment />,
     document.getElementById('app')
 );
