@@ -1,10 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button, Glyphicon, Media, Panel, ListGroup, ListGroupItem, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import '../css/bootstrap.min.css';
 import '../css/bootstrap-theme.min.css';
 import bg from '../img/bg.png'
+import fetch from 'node-fetch';
+import Pusher from 'pusher-js';
 
-class Comment extends React.Component{
+class Comment extends Component{
+    constructor() {
+        super();
+
+        this.state = {};
+    }
+
+    componentWillMount() {
+
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    getClick() {
+        // var that = this;
+        fetch('http://localhost:4000/comment',{
+            method: 'GET',
+            mode: 'cors',
+            // body: JSON.stringify({name: input.value}),
+        })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log('----call API successfully----');
+            console.log(data.message);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    postClick () {
+        alert('hehe');
+    }
+
     render() {
         return (
             <div>
@@ -22,7 +65,7 @@ class Comment extends React.Component{
                         <FormControl type="text" placeholder="Write comment here." />
                     </FormGroup>
                     {' '}
-                    <Button type="submit">submit</Button>
+                    <Button onClick={ this.getClick.bind(this) }>submit</Button>
                 </Form>
                 <br />
                 <Panel collapsible defaultExpanded header="Panel heading">
