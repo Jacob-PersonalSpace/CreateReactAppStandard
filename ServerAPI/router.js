@@ -35,11 +35,11 @@ router.post('/comment', function(req, res) {
     console.log(req.body.name);
     var newComment = {
         name: req.body.name,
-        email: req.body.email,
+        imageUrl: "",
         comment: req.body.comment
     }
     pusher.trigger('flash-comments', 'new-comment', newComment);
-    res.json({ created: true });
+    res.json(newComment);
 });
 
 module.exports = router;
