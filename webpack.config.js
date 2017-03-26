@@ -26,17 +26,20 @@ var config = {
         }, {
             test: /\.css$/,
             // loader: 'style-loader!css-loader!less-loader'
-            loader: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader" })
+            loader: ExtractTextPlugin.extract({ fallback: "style-loader", use: "css-loader", publicPath: "../" })
         }, {
-            test: /\.(jpe?g|png|gif|svg)$/,
+            test: /\.(jpe?g|png|gif)$/,
             loader: 'url-loader',
             query: {
                 limit: 50000,
                 name: 'static/img/[name].[ext]?[hash:7]'
             }
         }, {
-            test: /\.(eot|woff|woff2|ttf)$/, 
-            loader: "file-loader"
+            test: /\.(eot|woff|woff2|ttf|svg)$/, 
+            loader: "file-loader",
+            query: {
+                name: 'css/[hash].[ext]'
+            }
         }],
         noParse: [pathToReact, pathToReactDom]
     },

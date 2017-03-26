@@ -11464,6 +11464,12 @@ var Hello = function (_React$Component) {
                     _reactBootstrap.Button,
                     { bsStyle: 'primary' },
                     'Primary'
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { bsSize: 'large' },
+                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'star' }),
+                    ' Star'
                 )
             );
         }
