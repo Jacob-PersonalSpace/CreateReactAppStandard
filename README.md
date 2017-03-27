@@ -2,10 +2,12 @@
 It is the standard to create react App
 
 
-1. npm install
+1. npm install -g yarnpkg
 
-2. npm run febuild
+2. yarn
 
-3. npm run bestart
+3. yarn run febuild
 
-4. click build/index.html
+4. yarn run bestart
+
+5. click build/index.html
